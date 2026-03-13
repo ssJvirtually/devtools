@@ -4,9 +4,7 @@ A lightweight, developer-focused utility application built with JavaFX. DevUtils
 
 ## Demo
 
-<div align="center">
-  <video src="assets/DevUtils-demo-reel.mp4" width="800" controls></video>
-</div>
+https://github.com/ssJvirtually/devtools/assets/DevUtils-demo-reel.mp4
 
 ## Features
 
