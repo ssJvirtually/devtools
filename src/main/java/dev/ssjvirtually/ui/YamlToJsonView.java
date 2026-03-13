@@ -1,6 +1,7 @@
 package dev.ssjvirtually.ui;
 
 import dev.ssjvirtually.util.JsonProcessor;
+import dev.ssjvirtually.util.JsonSyntaxHighlighter;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -63,8 +64,20 @@ public class YamlToJsonView extends VBox {
 
     private CodeArea createCodeEditor(String promptText) {
         CodeArea area = new CodeArea();
+        // Removed LineNumberFactory to avoid NoSuchMethodError on internal APIs
         area.setPlaceholder(new Label(promptText));
         area.getStyleClass().add("code-editor");
+
+        area.textProperty().addListener((obs, oldText, newText) -> {
+            if (newText != null && !newText.isEmpty()) {
+                try {
+                    area.setStyleSpans(0, JsonSyntaxHighlighter.computeHighlighting(newText));
+                } catch (Exception ignored) {
+                    // Prevent crash on partial input during style computation
+                }
+            }
+        });
+
         return area;
     }
 

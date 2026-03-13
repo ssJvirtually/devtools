@@ -2,6 +2,12 @@
 
 A lightweight, developer-focused utility application built with JavaFX. DevUtils provides a suite of essential tools for daily development tasks, including formatting, conversion, and decoding.
 
+## Demo
+
+<div align="center">
+  <video src="assets/DevUtils-demo-reel.mp4" width="800" controls></video>
+</div>
+
 ## Features
 
 - **JSON Formatter**: Prettify and validate JSON strings with syntax highlighting.
