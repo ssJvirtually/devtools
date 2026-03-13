@@ -4,9 +4,10 @@ A lightweight, developer-focused utility application built with JavaFX. DevUtils
 
 ## Demo
 
-https://github.com/ssJvirtually/devtools/assets/DevUtils-demo-reel.mp4
+![DevUtils Demo](assets/DevUtils-demo-reel.gif)
 
 ## Features
+
 
 - **JSON Formatter**: Prettify and validate JSON strings with syntax highlighting.
 - **YAML to JSON**: Convert YAML configurations to JSON format seamlessly.
