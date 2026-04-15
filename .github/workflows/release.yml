@@ -96,6 +96,7 @@ jobs:
             -H:+ReportExceptionStackTraces `
             -H:ReflectionConfigurationFiles=src/main/resources/META-INF/native-image/reflect-config.json `
             -H:ResourceConfigurationFiles=src/main/resources/META-INF/native-image/resource-config.json `
+            -H:NativeLinkerOption=shlwapi.lib `
             --add-opens=java.base/java.util=ALL-UNNAMED `
             --add-opens=java.base/java.lang=ALL-UNNAMED `
             --enable-native-access=javafx.graphics,javafx.base `
