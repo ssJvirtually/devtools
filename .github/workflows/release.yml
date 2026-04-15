@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: devtools-jar
-          path: target/*.jar
+          path: target/devtools-*.jar
 
   build-windows:
     name: Build Windows Native Binary
@@ -63,8 +63,7 @@ jobs:
         id: version
         shell: pwsh
         run: |
-          [Xml]$Xml = Get-Content pom.xml
-          $VERSION = $Xml.project.version
+          $VERSION = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
           echo "VERSION=$VERSION" >> $env:GITHUB_ENV
           echo "JAR_NAME=devtools-$VERSION" >> $env:GITHUB_ENV
 
@@ -74,10 +73,11 @@ jobs:
       - name: Build Native Image
         shell: pwsh
         timeout-minutes: 30
-        continue-on-error: true
         run: |
-          $env:JAVA_HOME = $env:GRAALVM_HOME
-          $env:PATH = "$env:JAVA_HOME\bin;$env:PATH"
+          $JAR_FILE = "target/$env:JAR_NAME.jar"
+          if (-not (Test-Path $JAR_FILE)) {
+              $JAR_FILE = Get-ChildItem "target/devtools-*.jar" | Select-Object -First 1 -ExpandProperty FullName
+          }
           
           native-image `
             --no-fallback `
@@ -88,44 +88,36 @@ jobs:
             --add-opens=java.base/java.util=ALL-UNNAMED `
             --add-opens=java.base/java.lang=ALL-UNNAMED `
             -Djavafx.platform=win `
-            -jar target/${{ env.JAR_NAME }}.jar `
-            target/DevUtils-Windows.exe
+            -jar "$JAR_FILE" `
+            -o target/DevUtils-Windows
 
-      - name: Set Version
+      - name: Set Release Version
         shell: pwsh
         run: |
           if ("${{ github.ref }}".StartsWith("refs/tags/")) {
-            echo "VERSION=${{ github.ref_name }}" >> $env:GITHUB_ENV
+            $REL_VERSION = "${{ github.ref_name }}"
           } else {
             $SHORT_SHA = "${{ github.sha }}".Substring(0, 7)
-            echo "VERSION=dev-$SHORT_SHA" >> $env:GITHUB_ENV
+            $REL_VERSION = "dev-$SHORT_SHA"
           }
+          echo "REL_VERSION=$REL_VERSION" >> $env:GITHUB_ENV
 
       - name: Create Archive
         shell: pwsh
-        if: success()
         run: |
           mkdir target\dist
           Copy-Item target/DevUtils-Windows.exe target/dist/
-          Compress-Archive -Path target/dist/* -DestinationPath target/DevUtils-${{ env.VERSION }}-windows-x64.zip
+          Compress-Archive -Path target/dist/* -DestinationPath target/DevUtils-$env:REL_VERSION-windows-x64.zip
 
       - name: Upload Artifact
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: DevUtils-windows-x64
-          path: target/DevUtils-${{ env.VERSION }}-windows-x64.zip
-
-      - name: Upload to Release
-        if: startsWith(github.ref, 'refs/tags/') && success()
-        uses: softprops/action-gh-release@v1
-        with:
-          files: target/DevUtils-${{ env.VERSION }}-windows-x64.zip
-          token: ${{ secrets.GITHUB_TOKEN }}
+          path: target/DevUtils-*-windows-x64.zip
 
   build-macos:
     name: Build macOS Native Binary
-    runs-on: macos-latest
+    runs-on: macos-13
     
     steps:
       - name: Checkout Code
@@ -161,10 +153,11 @@ jobs:
       - name: Build Native Image
         shell: bash
         timeout-minutes: 30
-        continue-on-error: true
         run: |
-          export JAVA_HOME=$GRAALVM_HOME
-          export PATH=$JAVA_HOME/bin:$PATH
+          JAR_FILE="target/$JAR_NAME.jar"
+          if [ ! -f "$JAR_FILE" ]; then
+              JAR_FILE=$(ls target/devtools-*.jar | head -n 1)
+          fi
           
           native-image \
             --no-fallback \
@@ -175,42 +168,33 @@ jobs:
             --add-opens=java.base/java.util=ALL-UNNAMED \
             --add-opens=java.base/java.lang=ALL-UNNAMED \
             -Djavafx.platform=mac \
-            -jar target/${{ env.JAR_NAME }}.jar \
-            target/DevUtils-macOS
+            -jar "$JAR_FILE" \
+            -o target/DevUtils-macOS
 
-      - name: Set Version
+      - name: Set Release Version
         shell: bash
         run: |
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+            echo "REL_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
           else
             SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-            echo "VERSION=dev-$SHORT_SHA" >> $GITHUB_ENV
+            echo "REL_VERSION=dev-$SHORT_SHA" >> $GITHUB_ENV
           fi
 
       - name: Create Archive
         shell: bash
-        if: success()
         run: |
           mkdir -p target/dist
           cp target/DevUtils-macOS target/dist/
           chmod +x target/dist/DevUtils-macOS
           cd target/dist
-          zip -r ../DevUtils-${{ env.VERSION }}-macos-x64.zip .
+          zip -r ../DevUtils-${REL_VERSION}-macos-x64.zip .
 
       - name: Upload Artifact
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: DevUtils-macos-x64
-          path: target/DevUtils-${{ env.VERSION }}-macos-x64.zip
-
-      - name: Upload to Release
-        if: startsWith(github.ref, 'refs/tags/') && success()
-        uses: softprops/action-gh-release@v1
-        with:
-          files: target/DevUtils-${{ env.VERSION }}-macos-x64.zip
-          token: ${{ secrets.GITHUB_TOKEN }}
+          path: target/DevUtils-*-macos-x64.zip
 
   create-release:
     name: Create GitHub Release
@@ -232,18 +216,34 @@ jobs:
       - name: Generate Release Notes
         shell: bash
         run: |
-          echo "## 🚀 DevUtils ${{ github.ref_name }}" > RELEASE_NOTES.md
+          TAG_NAME="${{ github.ref_name }}"
+          echo "## 🚀 DevUtils $TAG_NAME" > RELEASE_NOTES.md
           echo "" >> RELEASE_NOTES.md
           echo "### 📦 Downloads" >> RELEASE_NOTES.md
           echo "" >> RELEASE_NOTES.md
-          echo "- **[JAR](devtools-${{ github.ref_name }}.jar)** - Cross-platform (requires Java 17+)" >> RELEASE_NOTES.md
           
-          if [ -f "artifacts/DevUtils-windows-x64/*.zip" ]; then
-            echo "- **[Windows](DevUtils-${{ github.ref_name }}-windows-x64.zip)** - Native binary (no Java required)" >> RELEASE_NOTES.md
+          # Find JAR file
+          JAR_FILE=$(find artifacts/devtools-jar -name "*.jar" ! -name "original-*" | head -n 1)
+          if [ -n "$JAR_FILE" ]; then
+            JAR_NAME=$(basename "$JAR_FILE")
+            cp "$JAR_FILE" .
+            echo "- **[JAR]($JAR_NAME)** - Cross-platform (requires Java 17+)" >> RELEASE_NOTES.md
           fi
           
-          if [ -f "artifacts/DevUtils-macos-x64/*.zip" ]; then
-            echo "- **[macOS](DevUtils-${{ github.ref_name }}-macos-x64.zip)** - Native binary (no Java required)" >> RELEASE_NOTES.md
+          # Find Windows ZIP
+          WIN_ZIP=$(find artifacts/DevUtils-windows-x64 -name "*.zip" | head -n 1)
+          if [ -n "$WIN_ZIP" ]; then
+            WIN_NAME=$(basename "$WIN_ZIP")
+            cp "$WIN_ZIP" .
+            echo "- **[Windows]($WIN_NAME)** - Native binary (no Java required)" >> RELEASE_NOTES.md
+          fi
+          
+          # Find macOS ZIP
+          MAC_ZIP=$(find artifacts/DevUtils-macos-x64 -name "*.zip" | head -n 1)
+          if [ -n "$MAC_ZIP" ]; then
+            MAC_NAME=$(basename "$MAC_ZIP")
+            cp "$MAC_ZIP" .
+            echo "- **[macOS]($MAC_NAME)** - Native binary (no Java required)" >> RELEASE_NOTES.md
           fi
           
           echo "" >> RELEASE_NOTES.md
@@ -263,8 +263,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            artifacts/devtools-jar/*.jar
-            artifacts/DevUtils-windows-x64/*.zip
-            artifacts/DevUtils-macos-x64/*.zip
+            *.jar
+            *.zip
           body_path: RELEASE_NOTES.md
           token: ${{ secrets.GITHUB_TOKEN }}
