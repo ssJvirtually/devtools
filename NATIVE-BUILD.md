@@ -5,35 +5,32 @@ This guide explains how to build DevUtils as a native binary using GraalVM.
 ## Prerequisites
 
 ### Local Build Requirements
-- **GraalVM JDK 17** - Download from [GitHub](https://github.com/graalvm/graalvm-ce-builds/releases) or use [SDKMAN!](https://sdkman.io/)
-- **Native Image tool** - Install with `gu install native-image`
+- **Liberica NIK (JDK 25)** - Download from [BellSoft](https://bell-sw.com/pages/downloads/native-image-kit/) or use [SDKMAN!](https://sdkman.io/)
+- **Native Image tool** - Included in Liberica NIK Full
 - **Maven 3.6+**
 - **Visual Studio Build Tools** (Windows only) - For native-image compilation
 - **Xcode Command Line Tools** (macOS only) - Run `xcode-select --install`
 
 ## Installation
 
-### 1. Install GraalVM
+### 1. Install Liberica NIK
 
 #### Using SDKMAN! (Linux/macOS)
 ```bash
-sdk install java 17.0.9-graal
-sdk use java 17.0.9-graal
+# Install Liberica NIK (JDK 25)
+sdk install java 25.0.0.r25-nik
+sdk use java 25.0.0.r25-nik
 ```
 
 #### Manual Installation
-1. Download GraalVM CE from [releases](https://github.com/graalvm/graalvm-ce-builds/releases)
-2. Extract and set `JAVA_HOME` to the GraalVM directory
+1. Download Liberica NIK Full (with JavaFX) from [BellSoft](https://bell-sw.com/pages/downloads/native-image-kit/)
+2. Extract and set `JAVA_HOME` to the NIK directory
 3. Add `$JAVA_HOME/bin` to your `PATH`
 
-### 2. Install Native Image Tool
+### 2. Verify Installation
 
 ```bash
-gu install native-image
-```
-
-Verify installation:
-```bash
+java -version
 native-image --version
 ```
 

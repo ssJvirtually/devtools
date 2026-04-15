@@ -24,7 +24,7 @@ A lightweight, developer-focused utility application built with JavaFX. DevUtils
 
 ## Prerequisites
 
-- **Java JDK 17** or higher.
+- **Java JDK 25** or higher.
 - **Maven 3.6** or higher.
 
 ## Setup Instructions
