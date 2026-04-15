@@ -92,8 +92,7 @@ jobs:
 
           native-image `
             --no-fallback `
-            --initialize-at-build-time `
-            --initialize-at-run-time=com.sun.javafx.scene.control.LabeledHelper,javafx.scene.control.Control,javafx.application.Application,javafx.scene.Parent,javafx.scene.Scene,javafx.stage.Stage,javafx.scene.layout.Region,javafx.scene.control.SkinBase,javafx.graphics,javafx.controls `
+            --initialize-at-run-time=com.sun.javafx,javafx `
             -H:+ReportExceptionStackTraces `
             -H:ReflectionConfigurationFiles=src/main/resources/META-INF/native-image/reflect-config.json `
             -H:ResourceConfigurationFiles=src/main/resources/META-INF/native-image/resource-config.json `
@@ -184,8 +183,7 @@ jobs:
 
           native-image \
             --no-fallback \
-            --initialize-at-build-time \
-            --initialize-at-run-time=com.sun.javafx.scene.control.LabeledHelper,javafx.scene.control.Control,javafx.application.Application,javafx.scene.Parent,javafx.scene.Scene,javafx.stage.Stage,javafx.scene.layout.Region,javafx.scene.control.SkinBase,javafx.graphics,javafx.controls \
+            --initialize-at-run-time=com.sun.javafx,javafx \
             -H:+ReportExceptionStackTraces \
             -H:ReflectionConfigurationFiles=src/main/resources/META-INF/native-image/reflect-config.json \
             -H:ResourceConfigurationFiles=src/main/resources/META-INF/native-image/resource-config.json \
