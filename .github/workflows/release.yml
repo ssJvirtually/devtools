@@ -89,15 +89,17 @@ jobs:
           if (-not (Test-Path $JAR_FILE)) {
               $JAR_FILE = Get-ChildItem "target/devtools-*.jar" | Select-Object -First 1 -ExpandProperty FullName
           }
-          
+
           native-image `
             --no-fallback `
             --initialize-at-build-time `
+            --initialize-at-run-time=com.sun.javafx.scene.control.LabeledHelper,javafx.scene.control.Control,javafx.application.Application,javafx.scene.Parent,javafx.scene.Scene,javafx.stage.Stage,javafx.scene.layout.Region,javafx.scene.control.SkinBase,javafx.graphics,javafx.controls `
             -H:+ReportExceptionStackTraces `
             -H:ReflectionConfigurationFiles=src/main/resources/META-INF/native-image/reflect-config.json `
             -H:ResourceConfigurationFiles=src/main/resources/META-INF/native-image/resource-config.json `
             --add-opens=java.base/java.util=ALL-UNNAMED `
             --add-opens=java.base/java.lang=ALL-UNNAMED `
+            --enable-native-access=javafx.graphics,javafx.base `
             -Djavafx.platform=win `
             -jar "$JAR_FILE" `
             -o target/DevUtils-Windows
@@ -179,15 +181,17 @@ jobs:
           if [ ! -f "$JAR_FILE" ]; then
               JAR_FILE=$(ls target/devtools-*.jar | head -n 1)
           fi
-          
+
           native-image \
             --no-fallback \
             --initialize-at-build-time \
+            --initialize-at-run-time=com.sun.javafx.scene.control.LabeledHelper,javafx.scene.control.Control,javafx.application.Application,javafx.scene.Parent,javafx.scene.Scene,javafx.stage.Stage,javafx.scene.layout.Region,javafx.scene.control.SkinBase,javafx.graphics,javafx.controls \
             -H:+ReportExceptionStackTraces \
             -H:ReflectionConfigurationFiles=src/main/resources/META-INF/native-image/reflect-config.json \
             -H:ResourceConfigurationFiles=src/main/resources/META-INF/native-image/resource-config.json \
             --add-opens=java.base/java.util=ALL-UNNAMED \
             --add-opens=java.base/java.lang=ALL-UNNAMED \
+            --enable-native-access=javafx.graphics,javafx.base \
             -Djavafx.platform=mac \
             -jar "$JAR_FILE" \
             -o target/DevUtils-macOS
