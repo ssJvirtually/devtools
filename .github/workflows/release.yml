@@ -63,7 +63,13 @@ jobs:
         id: version
         shell: pwsh
         run: |
-          $VERSION = mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+          $VERSION = (mvn help:evaluate -Dexpression=project.version -q -DforceStdout 2>&1)
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Failed to get project version: $VERSION"
+            exit 1
+          }
+          $VERSION = $VERSION.Trim()
+          Write-Host "Detected version: $VERSION"
           echo "VERSION=$VERSION" >> $env:GITHUB_ENV
           echo "JAR_NAME=devtools-$VERSION" >> $env:GITHUB_ENV
 
@@ -143,7 +149,13 @@ jobs:
         id: version
         shell: bash
         run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout 2>&1)
+          if [ $? -ne 0 ]; then
+            echo "Failed to get project version: $VERSION"
+            exit 1
+          fi
+          VERSION=$(echo "$VERSION" | xargs)  # trim whitespace
+          echo "Detected version: $VERSION"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "JAR_NAME=devtools-$VERSION" >> $GITHUB_ENV
 
