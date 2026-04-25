@@ -63,6 +63,20 @@ public class XmlJsonConverterView extends VBox {
         CodeArea area = new CodeArea();
         area.setPlaceholder(new Label(placeholder));
         area.getStyleClass().add("code-editor");
+        area.textProperty().addListener((obs, oldText, newText) -> {
+            if (newText != null && !newText.isEmpty()) {
+                try {
+                    // Only attempt highlighting if it looks like JSON
+                    if (newText.trim().startsWith("{") || newText.trim().startsWith("[")) {
+                        area.setStyleSpans(0, dev.ssjvirtually.util.JsonSyntaxHighlighter.computeHighlighting(newText));
+                    } else {
+                        // Clear styling if it's likely XML
+                        area.setStyleSpans(0, org.fxmisc.richtext.model.StyleSpans.singleton(java.util.Collections.emptyList(), newText.length()));
+                    }
+                } catch (Exception ignored) {
+                }
+            }
+        });
         return area;
     }
 
