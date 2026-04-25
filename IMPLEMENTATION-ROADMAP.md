@@ -151,9 +151,15 @@ Keep native-image compatibility in mind for each dependency and document reflect
   - Base64 String Encode/Decode
   - JWT Debugger
   - URL Encode/Decode
-- Next recommended batch:
+  - Backslash Escape/Unescape
+  - Hex to ASCII / ASCII to Hex
   - Hash Generator
   - UUID/ULID Generate/Decode
-  - Backslash Escape/Unescape
-  - Hex to ASCII
-  - ASCII to Hex
+  - String Case Converter
+  - String Inspector
+  - Line Sort/Dedupe
+- Next recommended batch:
+  - JSON to CSV
+  - CSV to JSON
+  - HTML Entity Encode/Decode
+  - Random String Generator

@@ -15,6 +15,9 @@ public class MainLayout extends BorderPane {
     private final BackslashEscapeView backslashEscapeView = new BackslashEscapeView();
     private final HexAsciiView hexAsciiView = new HexAsciiView();
     private final UuidUlidView uuidUlidView = new UuidUlidView();
+    private final StringCaseConverterView stringCaseConverterView = new StringCaseConverterView();
+    private final StringInspectorView stringInspectorView = new StringInspectorView();
+    private final LineSortDedupeView lineSortDedupeView = new LineSortDedupeView();
 
     public MainLayout() {
         Sidebar sidebar = new Sidebar();
@@ -56,6 +59,15 @@ public class MainLayout extends BorderPane {
                     break;
                 case "UUID/ULID Generate/Decode":
                     setCenter(uuidUlidView);
+                    break;
+                case "String Case Converter":
+                    setCenter(stringCaseConverterView);
+                    break;
+                case "String Inspector":
+                    setCenter(stringInspectorView);
+                    break;
+                case "Line Sort / Dedupe":
+                    setCenter(lineSortDedupeView);
                     break;
                 default:
                     // For now, clear the center if it's not implemented

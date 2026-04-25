@@ -24,7 +24,10 @@ public class Sidebar extends VBox {
             "URL Encode/Decode",
             "Backslash Escape/Unescape",
             "Hex to ASCII / ASCII to Hex",
-            "UUID/ULID Generate/Decode"
+            "UUID/ULID Generate/Decode",
+            "String Case Converter",
+            "String Inspector",
+            "Line Sort / Dedupe"
         );
         toolList.getSelectionModel().select("JSON Formatter");
         
