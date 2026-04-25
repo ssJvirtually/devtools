@@ -5,9 +5,9 @@ This guide explains how to set up and use the automated build and release system
 ## Overview
 
 This project includes GitHub Actions workflows that automatically:
-- ✅ Build JAR files on every push
+- ✅ Build JAR files and native binaries when a **GitHub Release** is created
 - ✅ Build native binaries for Windows and macOS using GraalVM
-- ✅ Create GitHub Releases with all artifacts when you push a tag
+- ✅ Attach all artifacts to the GitHub Release automatically
 
 ## Files Created
 
@@ -40,8 +40,9 @@ git push origin main
 
 1. Go to your repository on GitHub
 2. Click the **Actions** tab
-3. You should see the workflow running
-4. Wait for it to complete
+3. Select the **Build and Release** workflow
+4. Click **Run workflow** to test it manually
+5. Wait for it to complete
 
 ### 3. Download the First Build
 
