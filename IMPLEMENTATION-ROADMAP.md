@@ -58,14 +58,10 @@ Current baseline (as of 2026-04-25):
 ### Phase B: Data format converters
 1. JSON to CSV
 2. CSV to JSON
-3. PHP to JSON
-4. JSON to PHP
-5. PHP Serializer
-6. PHP Unserializer
-7. HTML Entity Encode/Decode
-8. URL Parser
-9. Number Base Converter
-10. Color Converter
+3. HTML Entity Encode/Decode
+4. URL Parser
+5. Number Base Converter 
+6. Color Converter
 
 ### Phase C: Crypto/identity/security
 1. Hash Generator
@@ -166,8 +162,5 @@ Keep native-image compatibility in mind for each dependency and document reflect
   - Color Converter
   - URL Parser
 - Next recommended batch:
-  - PHP to JSON
-  - PHP Serializer
-  - PHP Unserializer
   - HTML Beautify/Minify
   - CSS Beautify/Minify
