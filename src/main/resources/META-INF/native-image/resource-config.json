@@ -28,6 +28,9 @@
       "pattern": "META-INF/.*"
     },
     {
+      "pattern": "META-INF/services/.*"
+    },
+    {
       "pattern": "com/sun/javafx/.*"
     },
     {
