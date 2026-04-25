@@ -40,7 +40,9 @@ public class Sidebar extends VBox {
             "HTML Preview",
             "Markdown Preview",
             "Lorem Ipsum Generator",
-            "Text Diff Checker"
+            "Text Diff Checker",
+            "XML / JSON Converter",
+            "SQL Formatter"
         );
         toolList.getSelectionModel().select("JSON Formatter");
         

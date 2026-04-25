@@ -62,6 +62,8 @@ Current baseline (as of 2026-04-25):
 4. URL Parser
 5. Number Base Converter 
 6. Color Converter
+7. XML to JSON
+8. JSON to XML
 
 ### Phase C: Crypto/identity/security
 1. Hash Generator
@@ -157,7 +159,6 @@ Keep native-image compatibility in mind for each dependency and document reflect
   - JSON / CSV Converter
   - HTML Entity Encode/Decode
   - Random String Generator
-  - JSON to PHP
   - Number Base Converter
   - Color Converter
   - URL Parser
@@ -168,8 +169,8 @@ Keep native-image compatibility in mind for each dependency and document reflect
   - Markdown Preview
   - Lorem Ipsum Generator
   - Text Diff Checker
+  - XML / JSON Converter
+  - SQL Formatter
 - Next recommended batch:
   - JS Beautify/Minify
-  - SQL Formatter
   - QR Code Reader/Generator
-  - Certificate Decoder (X.509)

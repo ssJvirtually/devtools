@@ -31,6 +31,8 @@ public class MainLayout extends BorderPane {
     private final MarkdownPreviewView markdownPreviewView = new MarkdownPreviewView();
     private final LoremIpsumView loremIpsumView = new LoremIpsumView();
     private final DiffToolView diffToolView = new DiffToolView();
+    private final XmlJsonConverterView xmlJsonConverterView = new XmlJsonConverterView();
+    private final SqlFormatterView sqlFormatterView = new SqlFormatterView();
 
     public MainLayout() {
         Sidebar sidebar = new Sidebar();
@@ -120,6 +122,12 @@ public class MainLayout extends BorderPane {
                     break;
                 case "Text Diff Checker":
                     setCenter(diffToolView);
+                    break;
+                case "XML / JSON Converter":
+                    setCenter(xmlJsonConverterView);
+                    break;
+                case "SQL Formatter":
+                    setCenter(sqlFormatterView);
                     break;
                 default:
                     // For now, clear the center if it's not implemented
