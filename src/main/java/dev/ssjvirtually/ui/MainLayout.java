@@ -26,6 +26,11 @@ public class MainLayout extends BorderPane {
     private final UrlParserView urlParserView = new UrlParserView();
     private final HtmlBeautifierView htmlBeautifierView = new HtmlBeautifierView();
     private final CssBeautifierView cssBeautifierView = new CssBeautifierView();
+    private final XmlBeautifierView xmlBeautifierView = new XmlBeautifierView();
+    private final HtmlPreviewView htmlPreviewView = new HtmlPreviewView();
+    private final MarkdownPreviewView markdownPreviewView = new MarkdownPreviewView();
+    private final LoremIpsumView loremIpsumView = new LoremIpsumView();
+    private final DiffToolView diffToolView = new DiffToolView();
 
     public MainLayout() {
         Sidebar sidebar = new Sidebar();
@@ -100,6 +105,21 @@ public class MainLayout extends BorderPane {
                     break;
                 case "CSS Beautify / Minify":
                     setCenter(cssBeautifierView);
+                    break;
+                case "XML Beautify / Minify":
+                    setCenter(xmlBeautifierView);
+                    break;
+                case "HTML Preview":
+                    setCenter(htmlPreviewView);
+                    break;
+                case "Markdown Preview":
+                    setCenter(markdownPreviewView);
+                    break;
+                case "Lorem Ipsum Generator":
+                    setCenter(loremIpsumView);
+                    break;
+                case "Text Diff Checker":
+                    setCenter(diffToolView);
                     break;
                 default:
                     // For now, clear the center if it's not implemented

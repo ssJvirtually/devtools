@@ -161,6 +161,15 @@ Keep native-image compatibility in mind for each dependency and document reflect
   - Number Base Converter
   - Color Converter
   - URL Parser
-- Next recommended batch:
   - HTML Beautify/Minify
   - CSS Beautify/Minify
+  - XML Beautify/Minify
+  - HTML Preview
+  - Markdown Preview
+  - Lorem Ipsum Generator
+  - Text Diff Checker
+- Next recommended batch:
+  - JS Beautify/Minify
+  - SQL Formatter
+  - QR Code Reader/Generator
+  - Certificate Decoder (X.509)

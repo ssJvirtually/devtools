@@ -35,7 +35,12 @@ public class Sidebar extends VBox {
             "Color Converter",
             "URL Parser",
             "HTML Beautify / Minify",
-            "CSS Beautify / Minify"
+            "CSS Beautify / Minify",
+            "XML Beautify / Minify",
+            "HTML Preview",
+            "Markdown Preview",
+            "Lorem Ipsum Generator",
+            "Text Diff Checker"
         );
         toolList.getSelectionModel().select("JSON Formatter");
         
