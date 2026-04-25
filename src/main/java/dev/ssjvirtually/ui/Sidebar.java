@@ -27,7 +27,10 @@ public class Sidebar extends VBox {
             "UUID/ULID Generate/Decode",
             "String Case Converter",
             "String Inspector",
-            "Line Sort / Dedupe"
+            "Line Sort / Dedupe",
+            "JSON / CSV Converter",
+            "HTML Entity Encode/Decode",
+            "Random String Generator"
         );
         toolList.getSelectionModel().select("JSON Formatter");
         

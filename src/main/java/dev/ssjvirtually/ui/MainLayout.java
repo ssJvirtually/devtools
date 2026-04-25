@@ -18,6 +18,9 @@ public class MainLayout extends BorderPane {
     private final StringCaseConverterView stringCaseConverterView = new StringCaseConverterView();
     private final StringInspectorView stringInspectorView = new StringInspectorView();
     private final LineSortDedupeView lineSortDedupeView = new LineSortDedupeView();
+    private final JsonCsvView jsonCsvView = new JsonCsvView();
+    private final HtmlEntityView htmlEntityView = new HtmlEntityView();
+    private final RandomStringView randomStringView = new RandomStringView();
 
     public MainLayout() {
         Sidebar sidebar = new Sidebar();
@@ -68,6 +71,15 @@ public class MainLayout extends BorderPane {
                     break;
                 case "Line Sort / Dedupe":
                     setCenter(lineSortDedupeView);
+                    break;
+                case "JSON / CSV Converter":
+                    setCenter(jsonCsvView);
+                    break;
+                case "HTML Entity Encode/Decode":
+                    setCenter(htmlEntityView);
+                    break;
+                case "Random String Generator":
+                    setCenter(randomStringView);
                     break;
                 default:
                     // For now, clear the center if it's not implemented

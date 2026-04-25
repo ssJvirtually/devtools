@@ -158,8 +158,12 @@ Keep native-image compatibility in mind for each dependency and document reflect
   - String Case Converter
   - String Inspector
   - Line Sort/Dedupe
-- Next recommended batch:
-  - JSON to CSV
-  - CSV to JSON
+  - JSON / CSV Converter
   - HTML Entity Encode/Decode
   - Random String Generator
+- Next recommended batch:
+  - CSV to JSON (already integrated in JSON / CSV Converter)
+  - PHP to JSON
+  - JSON to PHP
+  - Number Base Converter
+  - Color Converter
