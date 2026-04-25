@@ -21,6 +21,10 @@ public class MainLayout extends BorderPane {
     private final JsonCsvView jsonCsvView = new JsonCsvView();
     private final HtmlEntityView htmlEntityView = new HtmlEntityView();
     private final RandomStringView randomStringView = new RandomStringView();
+    private final JsonToPhpView jsonToPhpView = new JsonToPhpView();
+    private final NumberBaseConverterView numberBaseConverterView = new NumberBaseConverterView();
+    private final ColorConverterView colorConverterView = new ColorConverterView();
+    private final UrlParserView urlParserView = new UrlParserView();
 
     public MainLayout() {
         Sidebar sidebar = new Sidebar();
@@ -80,6 +84,18 @@ public class MainLayout extends BorderPane {
                     break;
                 case "Random String Generator":
                     setCenter(randomStringView);
+                    break;
+                case "JSON to PHP Array":
+                    setCenter(jsonToPhpView);
+                    break;
+                case "Number Base Converter":
+                    setCenter(numberBaseConverterView);
+                    break;
+                case "Color Converter":
+                    setCenter(colorConverterView);
+                    break;
+                case "URL Parser":
+                    setCenter(urlParserView);
                     break;
                 default:
                     // For now, clear the center if it's not implemented

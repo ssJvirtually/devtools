@@ -161,9 +161,13 @@ Keep native-image compatibility in mind for each dependency and document reflect
   - JSON / CSV Converter
   - HTML Entity Encode/Decode
   - Random String Generator
-- Next recommended batch:
-  - CSV to JSON (already integrated in JSON / CSV Converter)
-  - PHP to JSON
   - JSON to PHP
   - Number Base Converter
   - Color Converter
+  - URL Parser
+- Next recommended batch:
+  - PHP to JSON
+  - PHP Serializer
+  - PHP Unserializer
+  - HTML Beautify/Minify
+  - CSS Beautify/Minify

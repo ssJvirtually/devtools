@@ -30,7 +30,11 @@ public class Sidebar extends VBox {
             "Line Sort / Dedupe",
             "JSON / CSV Converter",
             "HTML Entity Encode/Decode",
-            "Random String Generator"
+            "Random String Generator",
+            "JSON to PHP Array",
+            "Number Base Converter",
+            "Color Converter",
+            "URL Parser"
         );
         toolList.getSelectionModel().select("JSON Formatter");
         
