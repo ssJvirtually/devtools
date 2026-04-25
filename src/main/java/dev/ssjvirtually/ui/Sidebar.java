@@ -14,9 +14,11 @@ public class Sidebar extends VBox {
 
         toolList = new ListView<>();
         toolList.getItems().addAll(
+            "Unix Time Converter",
             "JSON Formatter",
+            "JSON to YAML",
             "YAML to JSON",
-            "Base64 Decode",
+            "Base64 String Encode/Decode",
             "JWT Debugger",
             "URL Encode/Decode"
         );

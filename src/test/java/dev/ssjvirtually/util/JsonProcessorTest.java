@@ -23,4 +23,14 @@ public class JsonProcessorTest {
         
         assertTrue(formatted.contains("\n  \"name\""));
     }
+
+    @Test
+    public void testJsonToYaml() throws Exception {
+        String input = "{\"name\":\"Alice\",\"enabled\":true}";
+        String yaml = JsonProcessor.jsonToYaml(input);
+
+        assertNotNull(yaml);
+        assertTrue(yaml.contains("name: \"Alice\""));
+        assertTrue(yaml.contains("enabled: true"));
+    }
 }

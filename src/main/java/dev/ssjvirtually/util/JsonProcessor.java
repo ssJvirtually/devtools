@@ -55,4 +55,9 @@ public class JsonProcessor {
         Object obj = YAML_MAPPER.readValue(yaml, Object.class);
         return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
     }
+
+    public static String jsonToYaml(String json) throws JsonProcessingException {
+        Object obj = MAPPER.readValue(json, Object.class);
+        return YAML_MAPPER.writeValueAsString(obj);
+    }
 }
