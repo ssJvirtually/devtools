@@ -11,6 +11,10 @@ public class MainLayout extends BorderPane {
     private final UrlCodecView urlCodecView = new UrlCodecView();
     private final JwtDebuggerView jwtDebuggerView = new JwtDebuggerView();
     private final UnixTimeConverterView unixTimeConverterView = new UnixTimeConverterView();
+    private final HashGeneratorView hashGeneratorView = new HashGeneratorView();
+    private final BackslashEscapeView backslashEscapeView = new BackslashEscapeView();
+    private final HexAsciiView hexAsciiView = new HexAsciiView();
+    private final UuidUlidView uuidUlidView = new UuidUlidView();
 
     public MainLayout() {
         Sidebar sidebar = new Sidebar();
@@ -40,6 +44,18 @@ public class MainLayout extends BorderPane {
                     break;
                 case "Unix Time Converter":
                     setCenter(unixTimeConverterView);
+                    break;
+                case "Hash Generator":
+                    setCenter(hashGeneratorView);
+                    break;
+                case "Backslash Escape/Unescape":
+                    setCenter(backslashEscapeView);
+                    break;
+                case "Hex to ASCII / ASCII to Hex":
+                    setCenter(hexAsciiView);
+                    break;
+                case "UUID/ULID Generate/Decode":
+                    setCenter(uuidUlidView);
                     break;
                 default:
                     // For now, clear the center if it's not implemented

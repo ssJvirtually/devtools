@@ -19,8 +19,12 @@ public class Sidebar extends VBox {
             "JSON to YAML",
             "YAML to JSON",
             "Base64 String Encode/Decode",
+            "Hash Generator",
             "JWT Debugger",
-            "URL Encode/Decode"
+            "URL Encode/Decode",
+            "Backslash Escape/Unescape",
+            "Hex to ASCII / ASCII to Hex",
+            "UUID/ULID Generate/Decode"
         );
         toolList.getSelectionModel().select("JSON Formatter");
         
