@@ -164,6 +164,7 @@ Keep native-image compatibility in mind for each dependency and document reflect
   - URL Parser
   - HTML Beautify/Minify
   - CSS Beautify/Minify
+  - JS Beautify/Minify
   - XML Beautify/Minify
   - HTML Preview
   - Markdown Preview
@@ -171,6 +172,13 @@ Keep native-image compatibility in mind for each dependency and document reflect
   - Text Diff Checker
   - XML / JSON Converter
   - SQL Formatter
+  - Certificate Decoder (X.509)
+  - RegExp Tester
+  - Cron Job Parser
+  - QR Code Reader / Generator
+  - JSON to Code
+  - HTML to JSX
+  - SVG to CSS
 - Next recommended batch:
-  - JS Beautify/Minify
-  - QR Code Reader/Generator
+  - cURL to Code
+  - ERB / LESS / SCSS Beautifiers

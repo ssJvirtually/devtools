@@ -10,6 +10,7 @@ public class MainLayout extends BorderPane {
     private final Base64ToolView base64ToolView = new Base64ToolView();
     private final UrlCodecView urlCodecView = new UrlCodecView();
     private final JwtDebuggerView jwtDebuggerView = new JwtDebuggerView();
+    private final CertificateDecoderView certificateDecoderView = new CertificateDecoderView();
     private final UnixTimeConverterView unixTimeConverterView = new UnixTimeConverterView();
     private final HashGeneratorView hashGeneratorView = new HashGeneratorView();
     private final BackslashEscapeView backslashEscapeView = new BackslashEscapeView();
@@ -26,6 +27,7 @@ public class MainLayout extends BorderPane {
     private final UrlParserView urlParserView = new UrlParserView();
     private final HtmlBeautifierView htmlBeautifierView = new HtmlBeautifierView();
     private final CssBeautifierView cssBeautifierView = new CssBeautifierView();
+    private final JsBeautifierView jsBeautifierView = new JsBeautifierView();
     private final XmlBeautifierView xmlBeautifierView = new XmlBeautifierView();
     private final HtmlPreviewView htmlPreviewView = new HtmlPreviewView();
     private final MarkdownPreviewView markdownPreviewView = new MarkdownPreviewView();
@@ -33,6 +35,12 @@ public class MainLayout extends BorderPane {
     private final DiffToolView diffToolView = new DiffToolView();
     private final XmlJsonConverterView xmlJsonConverterView = new XmlJsonConverterView();
     private final SqlFormatterView sqlFormatterView = new SqlFormatterView();
+    private final RegExpView regExpView = new RegExpView();
+    private final CronJobView cronJobView = new CronJobView();
+    private final QrCodeView qrCodeView = new QrCodeView();
+    private final JsonToCodeView jsonToCodeView = new JsonToCodeView();
+    private final HtmlToJsxView htmlToJsxView = new HtmlToJsxView();
+    private final SvgToCssView svgToCssView = new SvgToCssView();
 
     public MainLayout() {
         Sidebar sidebar = new Sidebar();
@@ -59,6 +67,9 @@ public class MainLayout extends BorderPane {
                     break;
                 case "JWT Debugger":
                     setCenter(jwtDebuggerView);
+                    break;
+                case "Certificate Decoder":
+                    setCenter(certificateDecoderView);
                     break;
                 case "Unix Time Converter":
                     setCenter(unixTimeConverterView);
@@ -108,6 +119,9 @@ public class MainLayout extends BorderPane {
                 case "CSS Beautify / Minify":
                     setCenter(cssBeautifierView);
                     break;
+                case "JS Beautify / Minify":
+                    setCenter(jsBeautifierView);
+                    break;
                 case "XML Beautify / Minify":
                     setCenter(xmlBeautifierView);
                     break;
@@ -128,6 +142,24 @@ public class MainLayout extends BorderPane {
                     break;
                 case "SQL Formatter":
                     setCenter(sqlFormatterView);
+                    break;
+                case "RegExp Tester":
+                    setCenter(regExpView);
+                    break;
+                case "Cron Job Parser":
+                    setCenter(cronJobView);
+                    break;
+                case "QR Code Reader / Generator":
+                    setCenter(qrCodeView);
+                    break;
+                case "JSON to Code":
+                    setCenter(jsonToCodeView);
+                    break;
+                case "HTML to JSX":
+                    setCenter(htmlToJsxView);
+                    break;
+                case "SVG to CSS":
+                    setCenter(svgToCssView);
                     break;
                 default:
                     // For now, clear the center if it's not implemented

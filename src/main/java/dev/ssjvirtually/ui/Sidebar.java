@@ -21,6 +21,7 @@ public class Sidebar extends VBox {
             "Base64 String Encode/Decode",
             "Hash Generator",
             "JWT Debugger",
+            "Certificate Decoder",
             "URL Encode/Decode",
             "Backslash Escape/Unescape",
             "Hex to ASCII / ASCII to Hex",
@@ -36,13 +37,20 @@ public class Sidebar extends VBox {
             "URL Parser",
             "HTML Beautify / Minify",
             "CSS Beautify / Minify",
+            "JS Beautify / Minify",
             "XML Beautify / Minify",
             "HTML Preview",
             "Markdown Preview",
             "Lorem Ipsum Generator",
             "Text Diff Checker",
             "XML / JSON Converter",
-            "SQL Formatter"
+            "SQL Formatter",
+            "RegExp Tester",
+            "Cron Job Parser",
+            "QR Code Reader / Generator",
+            "JSON to Code",
+            "HTML to JSX",
+            "SVG to CSS"
         );
         toolList.getSelectionModel().select("JSON Formatter");
         
